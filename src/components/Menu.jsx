@@ -3,14 +3,20 @@ import React from "react"
 
 export const Menu = ({ darkMode }) => {
   return (
-    <div>
-      <button>
-        <Link to="/"  >Home</Link>
-      </button>
-      <button>
-        <Link to="/Favorites"  >Favorites</Link>
-      </button>
-      <button onClick={darkMode} >dark Mode</button>
+    <div className="mynavbar">
+
+      <Link to="/"  >
+        <div className="navbarOptions">Home</div>
+      </Link>
+
+      <Link to="/Favorites"  >
+        <div className="navbarOptions">Favorites</div>
+      </Link>
+
+      <div onClick={darkMode} className="navbarOptions">
+        <i className="fas fa-adjust"></i>
+      </div>
+
     </div>
   )
 }

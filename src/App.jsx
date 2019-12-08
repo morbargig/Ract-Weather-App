@@ -5,6 +5,7 @@ import { observer } from 'mobx-react'
 import { Menu } from './components/Menu';
 import Home from './components/Home';
 import Favorites from './components/Favorites';
+import { Temperature } from './components/Temperature';
 
 @observer
 class App extends Component {
@@ -22,9 +23,9 @@ class App extends Component {
     var d = new Date();
     var n = d.getHours();
     // console.log(d,n)
-    if (n > 6 && n < 16 ){
+    if (n > 6 && n < 16) {
 
-    } else {this.setState({ darkMode : true }) }
+    } else { this.setState({ darkMode: true }) }
   }
   darkMode = () => {
     this.setState(prevState => ({
@@ -50,14 +51,19 @@ class App extends Component {
     alert('ERROR(' + error.code + '): ' + error.message);
   }
 
-
+  handleTemperture = () => {
+    this.setState(prevState => ({
+      isFahrenheit: !prevState.isFahrenheit
+    }))
+  }
 
   render() {
 
     return (
       <div className={this.state.darkMode ? "darkMode" : null}>
         <Router >
-          <Menu darkMode={this.darkMode} />
+          <Menu darkMode={this.darkMode}  />
+          <Temperature handleTemperture={this.handleTemperture} isFahrenheit={this.state.isFahrenheit} />
           <Route path="/" exact render={() => <Home />} />
           <Route path="/Favorites" render={() => <Favorites />} />
         </Router >

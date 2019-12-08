@@ -5,6 +5,7 @@ import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react'
 import { myStore } from './stores/myStore'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const MyStore = new myStore()
 
