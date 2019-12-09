@@ -1,7 +1,8 @@
 {
+  "homepage": "http://morbargig.github.io/Ract-Weather-App",
   "name": "weather-app",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.1.0",
   "dependencies": {
     "@babel/core": "7.5.5",
     "@babel/plugin-proposal-decorators": "^7.4.4",
