@@ -71,7 +71,8 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "deploy": "git add . && git commit -m 'automaticcommit' && git push origin master && git push heroku master"
+    "deploy": "git add . && git commit -m 'automaticcommit' && git push origin master && git push heroku master",
+    "mor": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -148,5 +149,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
   }
 }
