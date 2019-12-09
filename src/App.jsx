@@ -45,7 +45,9 @@ class App extends Component {
   }
 
   geo_success = (position) => {
-    console.log(position.coords.latitude, position.coords.longitude);
+    let l = position.coords
+    console.log(l.latitude, l.longitude);
+    this.setState({ currentLocation: { latitude: l.latitude, longitude: l.longitude } })
   }
   geo_error = (error) => {
     alert('ERROR(' + error.code + '): ' + error.message);
@@ -62,10 +64,10 @@ class App extends Component {
     return (
       <div className={this.state.darkMode ? "darkMode" : null}>
         <Router >
-          <Menu darkMode={this.darkMode}  />
+          <Menu darkMode={this.darkMode} />
           <Temperature handleTemperture={this.handleTemperture} isFahrenheit={this.state.isFahrenheit} />
-          <Route path="/" exact render={() => <Home />} />
-          <Route path="/Favorites" render={() => <Favorites />} />
+          <Route path="/" exact render={() => <Home  isFahrenheit={this.state.isFahrenheit}/>} />
+          <Route path="/Favorites" render={() => <Favorites isFahrenheit={this.state.isFahrenheit}/>} />
         </Router >
       </div>
 

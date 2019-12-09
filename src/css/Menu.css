@@ -1,0 +1,16 @@
+.mynavbar {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 35px;
+    border-radius: 0.5em;
+    padding: 5px;
+    font-size: 20px;
+    font-family: 'Acme', sans-serif;
+    background-color: rgb(122, 247, 205, 0.7);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
+    
+  }

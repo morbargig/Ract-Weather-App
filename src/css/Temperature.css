@@ -1,0 +1,42 @@
+.degrees{
+    margin-right: 10%;
+    padding: 5px;
+    display: flex;
+    float: right;
+    color: red;
+    font-weight: bold;
+    font-size: 30px;
+    border-radius: 0.7em;
+    background: none;
+    border: none;
+    background: none;
+    font-size: 20px;
+    cursor: grab;
+    font-family: 'Noto Serif', serif;
+  }
+  
+  .degrees .temperature button{
+    border: none;
+    background: none;
+    font-size: 20px;
+    font-family: 'Noto Serif', serif;
+    cursor: grabbing;
+    /* color: red; */
+    
+  }
+
+  .darkMode .degrees .temperature button{
+ color: white;
+  }
+
+  .temperature{
+    font-family: 'Acme', sans-serif;
+    grid-area: t;
+  }
+
+  .putAnUnderline{
+    text-decoration:underline;
+    font-family: 'Noto Serif', serif;
+    font-weight: bold;
+    cursor: none;
+  }

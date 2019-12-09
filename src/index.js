@@ -4,13 +4,13 @@ import './index.css';
 import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react'
-import { myStore } from './stores/myStore'
+import { favoritesStore } from './stores/favoritesStore'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-const MyStore = new myStore()
+const FavoritesStore = new favoritesStore()
 
 const stores = {
-    MyStore
+    FavoritesStore
 }
 ReactDOM.render(<Provider {...stores}>
     <App />
