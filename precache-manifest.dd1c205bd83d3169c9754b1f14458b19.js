@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ceaa5f5ad347ffb2215eaa093ac23bd0",
+    "revision": "c3d738bed57abc0f0cce3e9f135363ad",
     "url": "/Ract-Weather-App/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Ract-Weather-App/static/css/2.17e5ed98.chunk.css"
   },
   {
-    "revision": "99ac3b027bcb79513368",
+    "revision": "ebd4cb5b2a6ab9186977",
     "url": "/Ract-Weather-App/static/css/main.c2c9d5f6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Ract-Weather-App/static/js/2.5b3c82b8.chunk.js"
   },
   {
-    "revision": "99ac3b027bcb79513368",
-    "url": "/Ract-Weather-App/static/js/main.ded68843.chunk.js"
+    "revision": "ebd4cb5b2a6ab9186977",
+    "url": "/Ract-Weather-App/static/js/main.d324fbe3.chunk.js"
   },
   {
     "revision": "c130c2a6dabe1931c539",
