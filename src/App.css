@@ -133,8 +133,10 @@ color: rgb(37, 37, 250);
   padding: 10px;
   margin-left: 10%;
   margin-right: 10%;
+}
 
-  
+.FavRemove {
+  color: white;
 }
 .eachColumn{
   margin-left: 5px;

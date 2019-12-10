@@ -24,7 +24,7 @@ class ForecastResult extends Component {
 
     getForecastData = async (cityKey) => {
         if (this.state.forecastData === undefined) {
-            let res = await axios.get(`http://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${apiKey}`)
+            let res = await axios.get(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${apiKey}`)
             console.log(res.data.DailyForecasts)
             this.setState({ forecastData: res.data.DailyForecasts })
         }

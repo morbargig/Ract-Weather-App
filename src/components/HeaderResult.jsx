@@ -8,14 +8,21 @@ class HeaderResult extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isFavorite: false
+
         }
     }
 
     componentDidMount = () => {
-        let isFavorite = this.props.FavoritesStore.isFavorites(this.props.cityKey)
-        this.setState({ isFavorite })
+        this.isFavorite()
     }
+
+    isFavorite = () => {
+        let isFavorite = this.props.FavoritesStore.isFavorites(this.props.cityKey)
+        console.log(isFavorite)
+        let cityKey = this.props.cityKey
+        this.setState({ isFavorite, cityKey })
+    }
+
 
     addToFavorites = (key, name) => {
         this.props.FavoritesStore.addFavorite({ cityKey: key, cityName: name })
@@ -30,6 +37,9 @@ class HeaderResult extends Component {
     render() {
         let cityName = this.props.cityName
         let cityKey = this.props.cityKey
+        if (this.state.cityKey !== cityKey) {
+            this.isFavorite()
+        }
         return (
             <div className="tableHeaders">
                 <div className="locationName"> {cityName} ,{this.props.countryName}</div>
