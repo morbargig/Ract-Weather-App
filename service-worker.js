@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Ract-Weather-App/precache-manifest.dd1c205bd83d3169c9754b1f14458b19.js"
+  "/Ract-Weather-App/precache-manifest.cecff76375808a79551b537944123e60.js"
 );
 
 self.addEventListener('message', (event) => {
