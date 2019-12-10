@@ -6,10 +6,10 @@ import { observer, inject } from 'mobx-react'
 import { observable } from 'mobx';
 
 
-@inject(({ FavoritesStore }) => {
-  return FavoritesStore
-})
-// @inject("FavoritesStore")
+// @inject(({ FavoritesStore }) => {
+//   return FavoritesStore
+// })
+@inject("FavoritesStore")
 @observer
 class Favorites extends Component {
 
