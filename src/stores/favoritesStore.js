@@ -10,7 +10,7 @@ export class favoritesStore {
             this.favorites = favorites
             console.log(favorites)
             return favorites
-        }
+        } else { return []}
     }
     // @action allFavorites() {
 
