@@ -41,7 +41,9 @@ class Home extends Component {
   }
 
   displeyCity = async () => {
+    
     if (this.state.listOfCities !== undefined) {
+      this.state.FavoritesStore.resetSelectesCity()
       let selectedCity = this.state.listOfCities.find(i => i.LocalizedName === this.state.value)
       this.setState({ selectedCity })
       console.log(selectedCity)
@@ -51,7 +53,7 @@ class Home extends Component {
   
 
   defaultWeatherCity = async () => {
-    let res = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/215854?apikey=${apiKey}`)
+    let res = await axios.get(`https://dataservice.accuweather.com/currentconditions/v1/215854?apikey=${apiKey}`)
     console.log(res.data)
     this.setState({ difuletCity: ["Tell Aviv", res.data[0]] })
   }

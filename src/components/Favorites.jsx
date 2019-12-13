@@ -60,11 +60,11 @@ class Favorites extends Component {
     console.log(FavoritesData)
     this.setState({ FavoritesData: FavoritesData })
   }
-  showFullForecast = (key) => {
+  showFullForecast = (key, name) => {
     // if (!this.state.popUp) {
     //   this.setState({ cityKey: key, popUp: true })
     // }
-    
+    this.props.FavoritesStore.setSelectesCity(key, name)
   }
   closePopUp = () => {
     this.setState({ cityKey: null, popUp: false })
@@ -91,7 +91,7 @@ class Favorites extends Component {
             {this.state.FavoritesData.map((d, i) =>
               <div key={d.cityKey}>
                 {console.log(d)}
-                <div className="FavoritesData" onClick={() => this.showFullForecast(d.cityKey, i)} >
+                <div className="FavoritesData" onClick={() => this.showFullForecast(d.cityKey, d.cityName)} >
                   <div className="FavCity"> {d.cityName} </div>
                   <img className="FavPic" src={`https://developer.accuweather.com/sites/default/files/${d.res[0].WeatherIcon.toString().length === 1 ? "0" + d.res[0].WeatherIcon : d.res[0].WeatherIcon}-s.png`} alt="" />
                   <div className="FavPhrase"> {d.res[0].WeatherText} </div>

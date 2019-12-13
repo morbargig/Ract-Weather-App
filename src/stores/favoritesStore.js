@@ -1,4 +1,6 @@
 import { observable, computed, action } from 'mobx';
+import apiKey from '../config/apiKey';
+import axios from 'axios';
 
 export class favoritesStore {
     @observable favorites = []
@@ -20,11 +22,15 @@ export class favoritesStore {
         return selectesCity
     }
 
-    @action setSelectesCity = async (key) => {
-
+    @action setSelectesCity = async (key, cityName) => {
+        const res = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${cityName}`)
+        let selectesCity = res.data.filter(d => d.Key === key)
+        return selectesCity
     }
 
-    // }
+    @action resetSelectesCity = () => {
+        this.selectesCity = undefined
+    }
 
     @action addFavorite = async (obj) => {
         this.favorites.push(obj)

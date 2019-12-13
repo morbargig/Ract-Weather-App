@@ -35,14 +35,13 @@ class HeaderResult extends Component {
     }
 
     render() {
-        let cityName = this.props.cityName
-        let cityKey = this.props.cityKey
+        let { cityKey, cityName, countryName } = this.props
         if (this.state.cityKey !== cityKey) {
             this.isFavorite()
         }
         return (
             <div className="tableHeaders">
-                <div className="locationName"> {cityName} ,{this.props.countryName}</div>
+                <div className="locationName"> {cityName} ,{countryName}</div>
                 {!this.state.isFavorite ?
                     <button className="favorite" onClick={() => this.addToFavorites(cityKey, cityName)}> <i class="fa fa-bookmark"></i> </button>
                     :
