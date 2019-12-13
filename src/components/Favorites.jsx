@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import apiKey from '../config/apiKey';
 import { observer, inject } from 'mobx-react'
-import { observable } from 'mobx';
+// import { observable } from 'mobx';
 
 
 // @inject(({ FavoritesStore }) => {
@@ -50,18 +50,21 @@ class Favorites extends Component {
   getFavoritesData = async (array) => {
 
     let FavoritesData = []
-    for (let i of array) {
-      let res = await axios.get(`https://dataservice.accuweather.com/currentconditions/v1/${i.cityKey}?apikey=${apiKey}`)
+    for (let i = 0; i < array.length; i++) {
+      console.log(array[i])
+      let F = array[i]
+      let res = await axios.get(`https://dataservice.accuweather.com/currentconditions/v1/${F.cityKey}?apikey=${apiKey}`)
       // console.log(response)
-      FavoritesData.push({ cityName: i.cityName, cityKey: i.cityKey, res: res.data })
+      FavoritesData.push({ cityName:  F.cityName, cityKey: F.cityKey, res: res.data })
     }
     console.log(FavoritesData)
     this.setState({ FavoritesData: FavoritesData })
   }
   showFullForecast = (key) => {
-    if (!this.state.popUp) {
-      this.setState({ cityKey: key, popUp: true })
-    }
+    // if (!this.state.popUp) {
+    //   this.setState({ cityKey: key, popUp: true })
+    // }
+    
   }
   closePopUp = () => {
     this.setState({ cityKey: null, popUp: false })
@@ -69,19 +72,15 @@ class Favorites extends Component {
   removeFromFavorites = (key, i) => {
     this.props.FavoritesStore.rmoveFavorites(key)
     // console.log(this.state.FavoritesData)
-    // let FavoritesData = [...this.state.FavoritesData]
-    // console.log(FavoritesData)
-    // FavoritesData.splice(i, 1);  
-    // FavoritesData.filter(i => i.cityKey !== key)
-    // console.log(FavoritesData)
-      this.setState(prevState => ({
-        FavoritesData: prevState.FavoritesData.splice(i, 1)
-      }))
-    // this.setState({
-    //     FavoritesData 
-    //   }
-    //   , function () { console.log(this.state.FavoritesData) }
-    //   )
+    let FavoritesData = [...this.state.FavoritesData]
+    console.log(i)
+    FavoritesData.splice(i, 1);
+
+    console.log(this.state.FavoritesData)
+    this.setState({
+      FavoritesData
+    }
+      , function () { console.log(this.state.FavoritesData) })
   }
   render() {
     return (
@@ -89,19 +88,19 @@ class Favorites extends Component {
 
         {this.state.FavoritesData ?
           <div className="FavoritesContainer">
-            {this.state.FavoritesData.map((d,i) =>
+            {this.state.FavoritesData.map((d, i) =>
               <div key={d.cityKey}>
                 {console.log(d)}
-                <div className="FavoritesData" onClick={() => this.showFullForecast(d.cityKey,i)} >
+                <div className="FavoritesData" onClick={() => this.showFullForecast(d.cityKey, i)} >
                   <div className="FavCity"> {d.cityName} </div>
-                  <img class="FavPic" src={`https://developer.accuweather.com/sites/default/files/${d.res[0].WeatherIcon.toString().length === 1 ? "0" + d.res[0].WeatherIcon : d.res[0].WeatherIcon}-s.png`} />
+                  <img className="FavPic" src={`https://developer.accuweather.com/sites/default/files/${d.res[0].WeatherIcon.toString().length === 1 ? "0" + d.res[0].WeatherIcon : d.res[0].WeatherIcon}-s.png`} alt="" />
                   <div className="FavPhrase"> {d.res[0].WeatherText} </div>
 
                   <div className="FavTemp" >
-                    {!this.props.isFahrenheit ? Math.floor((parseInt(d.res[0].Temperature.Imperial.Value) - 32) / 1.8) : d.res[0].Temperature.Imperial.Value}
+                    {!this.props.isFahrenheit ? Math.floor((parseInt(d.res[0].Temperature.Imperial.Value) - 32) / 1.8) + "°": d.res[0].Temperature.Imperial.Value + "°"}
                   </div>
                 </div>
-                <div><button class="FavRemove" onClick={() => this.removeFromFavorites(d.cityKey,i)}><i class="fa fa-trash"></i> </button> </div>
+                <div><button className="FavRemove" onClick={() => this.removeFromFavorites(d.cityKey, i)}><i class="fa fa-trash"></i> </button> </div>
               </div>
             )
             } </div>

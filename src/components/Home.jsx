@@ -3,9 +3,19 @@ import axios from 'axios'
 import apiKey from '../config/apiKey'
 import HeaderResult from './HeaderResult';
 import ForecastResult from './ForecastResult';
-console.log(apiKey)
+import { DefultCity } from './DefultCity';
+import { observer, inject } from 'mobx-react'
+
+
+@inject("FavoritesStore")
+
+@observer
 class Home extends Component {
   state = {}
+
+  componentDidMount = () => {
+    this.defaultWeatherCity()
+  }
 
   handelChange = async (e) => {
     let name = e.target.name
@@ -31,36 +41,48 @@ class Home extends Component {
   }
 
   displeyCity = async () => {
-    let selectedCity = this.state.listOfCities.find(i => i.LocalizedName === this.state.value)
-    // let id = selectedCity.Key
-    // console.log(id,this.state.listOfCities,this.state.value)
-    // https://dataservice.accuweather.com/currentconditions/v1/locationKey?apikey=${apiKey}&locationkey=${id}&details=true
-    // const res = await axios.get(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/locationKey?apikey=${apiKey}&locationkey=${id}&details=true&metric=true`)
-    // console.log(res.data, id)
-    this.setState({ selectedCity })
-    console.log(selectedCity)
+    if (this.state.listOfCities !== undefined) {
+      let selectedCity = this.state.listOfCities.find(i => i.LocalizedName === this.state.value)
+      this.setState({ selectedCity })
+      console.log(selectedCity)
+    } else { alert("no city salected") }
+  }
+
+  
+
+  defaultWeatherCity = async () => {
+    let res = await axios.get(`http://dataservice.accuweather.com/currentconditions/v1/215854?apikey=${apiKey}`)
+    console.log(res.data)
+    this.setState({ difuletCity: ["Tell Aviv", res.data[0]] })
+  }
+
+
+  closerCity = async () => {
 
   }
 
 
-
   render() {
+    console.log(this.props.closerCity)
+    let selectedCity
+    this.props.FavoritesStore.getSelectesCity ? selectedCity = this.props.FavoritesStore.getSelectesCity : selectedCity = this.state.selectedCity
     return <div>
       {this.state.listOfCities ?
         <datalist name="dataList" id="browsers" onChange={this.todo}  >
           {this.state.listOfCities.map(i =>
             <option id={i.Key} key={i.Key} value={i.LocalizedName}> {i.Country.LocalizedName} </option>
           )}   </datalist> : null}
+
       <input type="text" list="browsers" name="browser" value={this.state.value} onChange={this.handelChange} className="col-sm-6 custom-select custom-select-sm" style={{ marginLeft: 10 + "%" }} >
       </input>
       <button onClick={this.displeyCity} className="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
-      {this.state.selectedCity ?
+      {this.state.difuletCity ? <DefultCity isFahrenheit={this.props.isFahrenheit} city={this.props.closerCity ? this.props.closerCity : this.state.difuletCity} /> : null}
+      {selectedCity ?
         <div>
-          <HeaderResult cityName={this.state.selectedCity.LocalizedName} countryName={this.state.selectedCity.Country.LocalizedName} cityKey={this.state.selectedCity.Key} />
-          <ForecastResult data={this.state.selectedCity} isFahrenheit={this.props.isFahrenheit} />
+          <HeaderResult cityName={selectedCity.LocalizedName} countryName={selectedCity.Country.LocalizedName} cityKey={selectedCity.Key} />
+          <ForecastResult data={selectedCity} isFahrenheit={this.props.isFahrenheit} />
         </div> : null
       }
-
     </div>
   }
 

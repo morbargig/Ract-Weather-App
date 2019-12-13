@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 // import iconsData from './IconsData'
 import moment from 'moment'
 import axios from 'axios'
-import { observer, inject } from 'mobx-react'
 import apiKey from '../config/apiKey';
+import { observer, inject } from 'mobx-react'
 
 
 @inject("FavoritesStore")
@@ -33,7 +33,7 @@ class ForecastResult extends Component {
         return (
 
 
-            <div class="ForcastColumn">
+            <div class="ForcastColumn" >
 
                 {this.state.forecastData ? this.state.forecastData.map(x =>
                     <div class="eachColumn">
@@ -41,13 +41,14 @@ class ForecastResult extends Component {
 
                         <div class="DayAndNight">
                             <div class="dayPhrase"> {x.Day.IconPhrase} </div>
-                            <div class="dayPic"><img src={`https://developer.accuweather.com/sites/default/files/${x.Day.Icon.toString().length === 1 ? "0" + x.Day.Icon : x.Day.Icon}-s.png`}  alt=""/> </div>
+                            <div class="dayPic"><img src={`https://developer.accuweather.com/sites/default/files/${x.Day.Icon.toString().length === 1 ? "0" + x.Day.Icon : x.Day.Icon}-s.png`} alt="" /> </div>
                             <div class="nightPhrase"> {x.Night.IconPhrase} </div>
                             {console.log(x.Day.Icon, typeof (x.Day.Icon), x.Day.Icon.toString().length)}
                             {console.log(x.Night.Icon, typeof (x.Night.Icon), x.Night.Icon.toString().length)}
                             <div class="nightPic"><img src={`https://developer.accuweather.com/sites/default/files/${x.Night.Icon.toString().length === 1 ? "0" + x.Night.Icon : x.Night.Icon}-s.png`} alt="" /> </div>
                         </div>
-                        <div class="temperature"> {this.props.isFahrenheit ? x.Temperature.Minimum.Value / x.Temperature.Maximum.Value : Math.floor((parseInt(x.Temperature.Minimum.Value) - 32) / 1.8)} / {Math.floor((parseInt(x.Temperature.Maximum.Value) - 32) / 1.8)}</div>
+                        {console.log(x.Temperature)}
+                        <div class="temperature"> {this.props.isFahrenheit ? x.Temperature.Minimum.Value + "° / " + x.Temperature.Maximum.Value + "°" : Math.floor((parseInt(x.Temperature.Minimum.Value) - 32) / 1.8) + "° / " + Math.floor((parseInt(x.Temperature.Maximum.Value) - 32) / 1.8) + "°"}</div>
                     </div>) : null}
             </div>
         )

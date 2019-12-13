@@ -15,38 +15,7 @@ body{
   width: 100vw;
 }
 
-.telAviv{
-  display: grid;
-  background-image: url("https://www.praguemorning.cz/wp-content/uploads/2019/07/sea-galil-1-min.jpg");
-  background-size: 400px;
-  background-repeat: no-repeat;
-  opacity: 0.7;
-  margin-top: 15px;
-  margin-left: 10%;
-  padding: 10px;
-  border-radius: 0.8em;
-  font-family: 'EB Garamond', serif;
-  width: 400px;
-  font-size: 25px;
-  grid-template-areas: 
-  "n . . ."
-  "n p . d"
-  "n p . d"
-  "n i . d"
 
-}
-.Tname{
-  grid-area: n;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 20px;
-  
-}
-.Ticon{
-  grid-area: i;  
-  margin-top: 5px;
-  text-align: center;
-}
 
 
 .searchBar{

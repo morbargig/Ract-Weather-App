@@ -2,6 +2,7 @@ import { observable, computed, action } from 'mobx';
 
 export class favoritesStore {
     @observable favorites = []
+    @observable selectesCity = undefined
 
     @computed get getAllFavorites() {
         let LSfavorites = localStorage.getItem('favorites')
@@ -10,9 +11,18 @@ export class favoritesStore {
             this.favorites = favorites
             console.log(favorites)
             return favorites
-        } else { return []}
+        } else { return [] }
     }
     // @action allFavorites() {
+
+    @computed get getSelectesCity() {
+        let selectesCity = this.selectesCity
+        return selectesCity
+    }
+
+    @action setSelectesCity = async (key) => {
+
+    }
 
     // }
 
@@ -55,7 +65,7 @@ export class favoritesStore {
                     isFavorites = true
                     favorites = LSfavorites
                     this.favorites = favorites
-                } 
+                }
             }
         } else {
             console.log("4")

@@ -6,6 +6,8 @@ import { Menu } from './components/Menu';
 import Home from './components/Home';
 import Favorites from './components/Favorites';
 import { Temperature } from './components/Temperature';
+import Axios from 'axios';
+import apiKey from './config/apiKey';
 
 @observer
 class App extends Component {
@@ -41,16 +43,20 @@ class App extends Component {
       timeout: 27000
     };
 
-    navigator.geolocation.watchPosition(this.geo_success, this.geo_error, geo_options)
+    navigator.geolocation.watchPosition(this.geo_success, this.geo_error, geo_options )
   }
 
-  geo_success = (position) => {
+  geo_success = async (position) => {
     let l = position.coords
     console.log(l.latitude, l.longitude);
-    this.setState({ currentLocation: { latitude: l.latitude, longitude: l.longitude } })
+    let res = await Axios.get(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${l.latitude+","+l.longitude}`)
+    let res2 = await Axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${res.data.Key}?apikey=${apiKey}`)
+    if (res.data.LocalizedName !==  ""){}
+    this.setState({ currentLocation: { latitude: l.latitude, longitude: l.longitude } , closerCity : [res.data.LocalizedName,res2.data[0]] })
+    console.log(res.data,res2.data[0])
   }
   geo_error = (error) => {
-    alert('ERROR(' + error.code + '): ' + error.message);
+    console.error('ERROR(' + error.code + '): ' + error.message);
   }
 
   handleTemperture = () => {
@@ -66,8 +72,8 @@ class App extends Component {
         <Router >
           <Menu darkMode={this.darkMode} />
           <Temperature handleTemperture={this.handleTemperture} isFahrenheit={this.state.isFahrenheit} />
-          <Route path="/" exact render={() => <Home  isFahrenheit={this.state.isFahrenheit}/>} />
-          <Route path="/Favorites" render={() => <Favorites isFahrenheit={this.state.isFahrenheit}/>} />
+          <Route path="/" exact render={() => <Home closerCity={this.state.closerCity} isFahrenheit={this.state.isFahrenheit} />} />
+          <Route path="/Favorites" render={() => <Favorites isFahrenheit={this.state.isFahrenheit} />} />
         </Router >
       </div>
 
