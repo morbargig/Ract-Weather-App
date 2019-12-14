@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios'
 import apiKey from '../config/apiKey';
 import { observer, inject } from 'mobx-react'
+import { Link } from 'react-router-dom';
 // import { observable } from 'mobx';
 
 
@@ -61,9 +62,7 @@ class Favorites extends Component {
     this.setState({ FavoritesData: FavoritesData })
   }
   showFullForecast = (key, name) => {
-    // if (!this.state.popUp) {
-    //   this.setState({ cityKey: key, popUp: true })
-    // }
+ console.log("hi")
     this.props.FavoritesStore.setSelectesCity(key, name)
   }
   closePopUp = () => {
@@ -91,6 +90,7 @@ class Favorites extends Component {
             {this.state.FavoritesData.map((d, i) =>
               <div key={d.cityKey}>
                 {console.log(d)}
+                <Link to="/" >
                 <div className="FavoritesData" onClick={() => this.showFullForecast(d.cityKey, d.cityName)} >
                   <div className="FavCity"> {d.cityName} </div>
                   <img className="FavPic" src={`https://developer.accuweather.com/sites/default/files/${d.res[0].WeatherIcon.toString().length === 1 ? "0" + d.res[0].WeatherIcon : d.res[0].WeatherIcon}-s.png`} alt="" />
@@ -100,6 +100,7 @@ class Favorites extends Component {
                     {!this.props.isFahrenheit ? Math.floor((parseInt(d.res[0].Temperature.Imperial.Value) - 32) / 1.8) + "°": d.res[0].Temperature.Imperial.Value + "°"}
                   </div>
                 </div>
+                </Link>
                 <div><button className="FavRemove" onClick={() => this.removeFromFavorites(d.cityKey, i)}><i class="fa fa-trash"></i> </button> </div>
               </div>
             )

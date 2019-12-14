@@ -51,9 +51,10 @@ class App extends Component {
     console.log(l.latitude, l.longitude);
     let res = await Axios.get(`https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKey}&q=${l.latitude+","+l.longitude}`)
     let res2 = await Axios.get(`http://dataservice.accuweather.com/currentconditions/v1/${res.data.Key}?apikey=${apiKey}`)
-    if (res.data.LocalizedName !==  ""){}
-    this.setState({ currentLocation: { latitude: l.latitude, longitude: l.longitude } , closerCity : [res.data.LocalizedName,res2.data[0]] })
-    console.log(res.data,res2.data[0])
+    if (res.data.LocalizedName !==  "Dohan"){ 
+      this.setState({ currentLocation: { latitude: l.latitude, longitude: l.longitude } , closerCity : [res.data.LocalizedName,res2.data[0]] })
+      console.log(res.data,res2.data[0])
+    }
   }
   geo_error = (error) => {
     console.error('ERROR(' + error.code + '): ' + error.message);

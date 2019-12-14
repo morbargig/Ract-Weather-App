@@ -19,17 +19,21 @@ export class favoritesStore {
 
     @computed get getSelectesCity() {
         let selectesCity = this.selectesCity
+        console.log(selectesCity)
         return selectesCity
     }
 
     @action setSelectesCity = async (key, cityName) => {
         const res = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${cityName}`)
         let selectesCity = res.data.filter(d => d.Key === key)
+        console.log(selectesCity)
+        this.selectesCity = selectesCity
         return selectesCity
     }
 
     @action resetSelectesCity = () => {
         this.selectesCity = undefined
+        console.log(this.selectesCity)
     }
 
     @action addFavorite = async (obj) => {

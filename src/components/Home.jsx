@@ -66,8 +66,9 @@ class Home extends Component {
 
   render() {
     console.log(this.props.closerCity)
+    console.log( this.props.FavoritesStore.getSelectesCity )
     let selectedCity
-    this.props.FavoritesStore.getSelectesCity ? selectedCity = this.props.FavoritesStore.getSelectesCity : selectedCity = this.state.selectedCity
+    this.props.FavoritesStore.getSelectesCity ? selectedCity = this.props.FavoritesStore.getSelectesCity[0] : selectedCity = this.state.selectedCity
     return <div>
       {this.state.listOfCities ?
         <datalist name="dataList" id="browsers" onChange={this.todo}  >
@@ -79,7 +80,7 @@ class Home extends Component {
       </input>
       <button onClick={this.displeyCity} className="btn aqua-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
       {this.state.difuletCity ? <DefultCity isFahrenheit={this.props.isFahrenheit} city={this.props.closerCity ? this.props.closerCity : this.state.difuletCity} /> : null}
-      {selectedCity ?
+      {selectedCity || this.props.FavoritesStore.getSelectesCity ?
         <div>
           <HeaderResult cityName={selectedCity.LocalizedName} countryName={selectedCity.Country.LocalizedName} cityKey={selectedCity.Key} />
           <ForecastResult data={selectedCity} isFahrenheit={this.props.isFahrenheit} />

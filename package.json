@@ -73,9 +73,8 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "predeploy": "npm run build",
-"deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build",
     "automaticpush": " git add . && git commit -m 'automaticcommit' && git push origin master && npm run deploy &&  git push heroku master"
-   
   },
   "eslintConfig": {
     "extends": "react-app"
