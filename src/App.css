@@ -1,4 +1,5 @@
 .darkMode {
+  margin-top: 0;
   background-image: url("https://cdn.pixabay.com/photo/2016/08/26/11/54/black-and-white-1621976_1280.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -14,10 +15,6 @@ body{
   height: 100vh;
   width: 100vw;
 }
-
-
-
-
 .searchBar{
   margin-top: 30px;
   width: fit-content;
@@ -43,6 +40,9 @@ body{
 .fullResult{
   background: grey;
   opacity: 0.7;
+}
+..mynavbar {
+  margin-top: 10px;
 }
 .ForecastTable {
   display: grid;
@@ -110,7 +110,7 @@ color: rgb(37, 37, 250);
 .eachColumn{
   margin-left: 5px;
   padding: 10px;
-  background-color:#81ecec;
+  background-color:#709494;
   border-radius: 0.7em;
   display: grid;
   grid-template-areas: 
@@ -118,7 +118,6 @@ color: rgb(37, 37, 250);
   "f f f"
   "f f f"
   ". t ."
-  
 }
 .fullDate{
   font-family: 'Noto Serif', serif;
@@ -225,5 +224,4 @@ cursor: zoom-out;
   "f f f"
   "f f f"
   ". t ."
-  
 }

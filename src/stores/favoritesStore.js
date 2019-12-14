@@ -31,7 +31,7 @@ export class favoritesStore {
         return selectesCity
     }
 
-    @action resetSelectesCity = () => {
+    @action resetSelectedCity = () => {
         this.selectesCity = undefined
         console.log(this.selectesCity)
     }

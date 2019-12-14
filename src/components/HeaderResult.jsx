@@ -41,7 +41,7 @@ class HeaderResult extends Component {
         }
         return (
             <div className="tableHeaders">
-                <div className="locationName"> {cityName} ,{countryName}</div>
+                <div className="locationName"> {cityName} , {countryName}</div>
                 {!this.state.isFavorite ?
                     <button className="favorite" onClick={() => this.addToFavorites(cityKey, cityName)}> <i class="fa fa-bookmark"></i> </button>
                     :

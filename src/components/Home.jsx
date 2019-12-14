@@ -23,34 +23,34 @@ class Home extends Component {
     let key = e.target.key
     let id = e.target.id
     let letters = /^[A-Z a-z]+$/i;
-    let english
-    if (value.match(letters)) {
-      english = true;
-    }
-    else {
-      alert("english letters only");
-      english = false;
-    }
-    console.log(value, name, key, id, e.target.parentElement)
-    if (value !== "" && english === true) {
+    if (value.match(letters) && value !== "") {
       const res = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${value}`)
       console.log(res.data)
       let listOfCities = res.data
       this.setState({ value, listOfCities })
-    } else { this.setState({ value: '' }) }
+    } else {
+      if (
+        value !== "") {
+        alert("english letters only");
+        this.setState({
+          value: value.substring(1,value.length - 1)
+        })
+      }
+    }
+    console.log(value, name, key, id, e.target)
   }
 
   displeyCity = async () => {
-    
+
     if (this.state.listOfCities !== undefined) {
-      this.state.FavoritesStore.resetSelectesCity()
+      this.props.FavoritesStore.resetSelectedCity()
       let selectedCity = this.state.listOfCities.find(i => i.LocalizedName === this.state.value)
       this.setState({ selectedCity })
       console.log(selectedCity)
     } else { alert("no city salected") }
   }
 
-  
+
 
   defaultWeatherCity = async () => {
     let res = await axios.get(`https://dataservice.accuweather.com/currentconditions/v1/215854?apikey=${apiKey}`)
@@ -59,14 +59,9 @@ class Home extends Component {
   }
 
 
-  closerCity = async () => {
-
-  }
-
-
   render() {
     console.log(this.props.closerCity)
-    console.log( this.props.FavoritesStore.getSelectesCity )
+    console.log(this.props.FavoritesStore.getSelectesCity)
     let selectedCity
     this.props.FavoritesStore.getSelectesCity ? selectedCity = this.props.FavoritesStore.getSelectesCity[0] : selectedCity = this.state.selectedCity
     return <div>
