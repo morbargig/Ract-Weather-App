@@ -74,7 +74,7 @@
     "test": "node scripts/test.js",
     "predeploy": "npm run build",
 "deploy": "gh-pages -d build",
-    "automaticpush": "git add . && git commit -m 'automaticcommit' && git push origin master &&  run deploy && git push heroku master"
+    "automaticpush": "npm run deploy && git add . && git commit -m 'automaticcommit' && git push origin master &&  git push heroku master"
    
   },
   "eslintConfig": {
