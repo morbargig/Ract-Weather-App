@@ -11,7 +11,7 @@ export class favoritesStore {
         if (LSfavorites) {
             let favorites = JSON.parse(localStorage.getItem('favorites'))
             this.favorites = favorites
-            console.log(favorites)
+            // console.log(favorites)
             return favorites
         } else { return [] }
     }
@@ -19,30 +19,29 @@ export class favoritesStore {
 
     @computed get getSelectesCity() {
         let selectesCity = this.selectesCity
-        console.log(selectesCity)
+        // console.log(selectesCity)
         return selectesCity
     }
 
     @action setSelectesCity = async (key, cityName) => {
         const res = await axios.get(`https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=${apiKey}&q=${cityName}`)
         let selectesCity = res.data.filter(d => d.Key === key)
-        console.log(selectesCity)
+        // console.log(selectesCity)
         this.selectesCity = selectesCity
         return selectesCity
     }
 
     @action resetSelectedCity = () => {
         this.selectesCity = undefined
-        console.log(this.selectesCity)
+        // console.log(this.selectesCity)
     }
 
     @action addFavorite = async (obj) => {
         this.favorites.push(obj)
-        console.log(this.favorites, obj)
-        console.log(obj)
+        // console.log(this.favorites, obj)
         let LSfavorites = localStorage.getItem('favorites') ? JSON.parse(localStorage.getItem('favorites')) : []
         await LSfavorites.push(obj)
-        console.log(LSfavorites)
+        // console.log(LSfavorites)
         localStorage.setItem('favorites', JSON.stringify(LSfavorites))
     }
 
@@ -65,20 +64,20 @@ export class favoritesStore {
         let isFavorites
         let favorites
         if (localStorage.getItem('favorites')) {
-            console.log("1")
+            // console.log("1")
             let LSfavorites = JSON.parse(localStorage.getItem('favorites'))
             for (let i = 0; i < LSfavorites.length; i++) {
-                console.log("2")
+                // console.log("2")
                 let fav = LSfavorites[i]
                 if (fav.cityKey === favoritesKey) {
-                    console.log("3")
+                    // console.log("3")
                     isFavorites = true
                     favorites = LSfavorites
                     this.favorites = favorites
                 }
             }
         } else {
-            console.log("4")
+            // console.log("4")
             isFavorites = false
             isFavorites = this.favorites.filter(i => i.key === favoritesKey)
             isFavorites.length !== 0 ? isFavorites = true : isFavorites = false

@@ -3,7 +3,7 @@ import '../css/DefultCity.css'
 
 export const DefultCity = ({ city, isFahrenheit }) => {
   let  { WeatherText , WeatherIcon , Temperature } = city[1]
-    console.log(city)
+    // console.log(city)
     return <div className="defultCity">
         <div className="Tname"> {city[0]} </div>
         <div className="Tphrase"> {WeatherText} </div>

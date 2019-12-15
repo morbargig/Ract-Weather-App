@@ -1,0 +1,54 @@
+.ForcastColumn{    
+    padding: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 100px;
+    /* position: fixed; */
+}
+.eachColumn{
+  padding: 30px;
+  background: linear-gradient(#1e558c, #596069, transparent);
+  background-color:#709494;
+  border-radius: 0.7em;
+  display: grid;
+  border-color: #709494;
+  border: 10px;
+  grid-template-areas: 
+  "d d d"
+  "f f f"
+  "f f f"
+  ". t ."
+}
+
+  .fullDate{
+    font-family: 'Noto Serif', serif;
+    text-decoration: underline;
+    grid-area: d;
+  }
+
+  .DayAndNight {
+    grid-area : f;
+    display: grid; 
+    grid-template-areas: 
+    "D N"
+    "p i"
+  }
+
+  .dayPhrase {
+    grid-area : D;
+    font-family: 'EB Garamond', serif;
+    display: grid;
+    text-align: center;
+  }
+  .nightPhrase {
+    grid-area : N;
+    font-family: 'Bree Serif', serif;
+    display: grid;
+    text-align: center;
+  }
+  .dayPic{
+    grid-area: p;
+  }
+  .nightPic{
+    grid-area:i;
+  }

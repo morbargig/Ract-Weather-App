@@ -18,7 +18,7 @@ class HeaderResult extends Component {
 
     isFavorite = () => {
         let isFavorite = this.props.FavoritesStore.isFavorites(this.props.cityKey)
-        console.log(isFavorite)
+        // console.log(isFavorite)
         let cityKey = this.props.cityKey
         this.setState({ isFavorite, cityKey })
     }

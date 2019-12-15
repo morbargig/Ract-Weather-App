@@ -15,54 +15,19 @@ body{
   height: 100vh;
   width: 100vw;
 }
-.searchBar{
-  margin-top: 30px;
-  width: fit-content;
-  padding: 10px;
-  margin-left: 10%;
-  border-radius: 0.7em;
-  background-color:none;
-}
-.searchInput{
-  padding:5px;
-  font-family: 'Noto Serif', serif;
-  color: red;
-  border:none;
-  width: 200px;
-}
-.search{
-  border: none;
-  background: none;
-  color: red;
-  cursor: pointer;
-  font-size: 20px;
-}
+
 .fullResult{
   background: grey;
   opacity: 0.7;
 }
-..mynavbar {
-  margin-top: 10px;
-}
+
 .ForecastTable {
   display: grid;
   grid-template-areas: 
   "h"
   "d"
 }
-.options{
-  margin-left: 10%;
-  margin-top: 5px;
-  color: black;
-  cursor: grab;
-  font-family: 'Noto Serif', serif;
-}
-.options:hover{
-color: rgb(37, 37, 250);
-}
-.options:active{
-  cursor: grabbing;
-}
+
 .tableHeaders{
   grid-area: h;
   margin-top: 10px;
@@ -95,110 +60,11 @@ color: rgb(37, 37, 250);
   border: none;
   cursor: pointer;
 }
-.ForcastColumn{
-  grid-area : d;
-  display:grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  padding: 10px;
-  margin-left: 10%;
-  margin-right: 10%;
-}
 
-.FavRemove {
-  color: white;
-}
-.eachColumn{
-  margin-left: 5px;
-  padding: 10px;
-  background-color:#709494;
-  border-radius: 0.7em;
-  display: grid;
-  grid-template-areas: 
-  "d d d"
-  "f f f"
-  "f f f"
-  ". t ."
-}
-.fullDate{
-  font-family: 'Noto Serif', serif;
-  text-decoration: underline;
-  grid-area: d;
-}
 
-.DayAndNight {
-  grid-area : f;
-  display: grid; 
-  grid-template-areas: 
-  "D N"
-  "p i"
-}
-.dayPhrase {
-  grid-area : D;
-  font-family: 'EB Garamond', serif;
-  display: grid;
-  text-align: center;
-}
-.nightPhrase {
-  grid-area : N;
-  font-family: 'Bree Serif', serif;
-  display: grid;
-  text-align: center;
-}
-.dayPic{
-  grid-area: p;
-}
-.nightPic{
-  grid-area:i;
-}
 
-.FavoritesContainer{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 10px;
-}
-.FavoritesData{
-  display: grid;
-  background: #fab1a0;
-  margin-top: 15px;
-  margin-left: 5%;
-  padding: 10px;
-  border-radius: 0.8em;
-  font-family: 'EB Garamond', serif;
-  text-align: center;
-  justify-items: center;
-  width: 200px;
-  height: 200px;
-  font-size: 25px;
-  cursor: zoom-in;
-  grid-template-areas: 
-  "c c c"
-  "i i i"
-  "p p p"
-  "t t t"
-}
-.FavCity{
-  grid-area : c;
-}
-.FavRemove{
-  grid-area: r;
-  display: flex;
-  justify-content: flex-end;
-  font-size: 15px;
-  background: none;
-  border: none;
-  color: black;
-  cursor: pointer;
-}
-.FavPic{
-  grid-area: i;
-}
-.FavPhrase{
-  grid-area: p;
-}
-.FavTemp{
-  grid-area: t;
-}
-.PopUp{
+
+/* .PopUp{
 height: 200px;
 width:fit-content;
 position: fixed;
@@ -211,17 +77,4 @@ margin: auto;
 display: grid;
 grid-template-columns: repeat(5, 1fr);
 cursor: zoom-out;
-}
-.FavEachColumn{
-  margin-left: 5px;
-  padding: 10px;
-  background-color:#81ecec;
-  border-radius: 0.7em;
-  width: 190px;
-  display: grid;
-  grid-template-areas: 
-  "d d d"
-  "f f f"
-  "f f f"
-  ". t ."
-}
+} */

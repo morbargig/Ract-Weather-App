@@ -1,0 +1,48 @@
+
+.FavoritesContainer{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 10px;
+  }
+  .FavoritesData{
+    display: grid;
+    background: linear-gradient(15deg, #000000, #ffc82299);
+    margin-top: 15%;
+    margin-left: 5%;
+    padding: 10px;
+    border-radius: 0.8em;
+    font-family: 'EB Garamond', serif;
+    text-align: center;
+    justify-items: center;
+    width: 200px;
+    height: 200px;
+    font-size: 25px;
+    cursor: zoom-in;
+    grid-template-areas: 
+    "c c c"
+    "i i i"
+    "p p p"
+    "t t t"
+  }
+  .FavCity{
+    grid-area : c;
+  }
+  .FavRemove{
+    grid-area: r;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 15px;
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+  }
+  .FavPic{
+    grid-area: i;
+  }
+  .FavPhrase{
+    grid-area: p;
+  }
+  .FavTemp{
+    grid-area: t;
+  }

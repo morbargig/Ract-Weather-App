@@ -4,6 +4,7 @@ import axios from 'axios'
 import apiKey from '../config/apiKey';
 import { observer, inject } from 'mobx-react'
 import { Link } from 'react-router-dom';
+import '../css/Favorites.css'
 // import { observable } from 'mobx';
 
 
@@ -27,42 +28,26 @@ class Favorites extends Component {
     this.setState({
       Favorites
     }
-      , function () { console.log(this.state.Favorites) }
+      // , function () { console.log(this.state.Favorites) }
     )
-    // )
-    // @computed  get favorites (){
-
-    //  return this.props.FavoritesStore.allFavorites()
-    // } 
     this.getFavoritesData(Favorites)
   }
-  checkForDuplicates = (array) => {
-    // for (let i = 0; i < array.length; i++) {
-    //   for (let j = i + 1; j < array.length; j++) {
-    //     if (array[i].cityKey === array[j].cityKey) {
-    //       array.splice(j, 1)
-    //     }
-    //   }
-    // }
-    // let favorites = JSON.stringify(array)
-    // localStorage.setItem('favorites', favorites)
-    // this.getFavoritesData(array)
-  }
+
   getFavoritesData = async (array) => {
 
     let FavoritesData = []
     for (let i = 0; i < array.length; i++) {
-      console.log(array[i])
+      // console.log(array[i])
       let F = array[i]
       let res = await axios.get(`https://dataservice.accuweather.com/currentconditions/v1/${F.cityKey}?apikey=${apiKey}`)
       // console.log(response)
-      FavoritesData.push({ cityName:  F.cityName, cityKey: F.cityKey, res: res.data })
+      FavoritesData.push({ cityName: F.cityName, cityKey: F.cityKey, res: res.data })
     }
-    console.log(FavoritesData)
+    // console.log(FavoritesData)
     this.setState({ FavoritesData: FavoritesData })
   }
   showFullForecast = (key, name) => {
- console.log("hi")
+    //  console.log("hi")
     this.props.FavoritesStore.setSelectesCity(key, name)
   }
   closePopUp = () => {
@@ -72,39 +57,43 @@ class Favorites extends Component {
     this.props.FavoritesStore.rmoveFavorites(key)
     // console.log(this.state.FavoritesData)
     let FavoritesData = [...this.state.FavoritesData]
-    console.log(i)
+    // console.log(i)
     FavoritesData.splice(i, 1);
 
-    console.log(this.state.FavoritesData)
+    // console.log(this.state.FavoritesData)
     this.setState({
       FavoritesData
     }
-      , function () { console.log(this.state.FavoritesData) })
+      // , function () { console.log(this.state.FavoritesData) })
+    )
   }
+
   render() {
     return (
       <div>
 
         {this.state.FavoritesData ?
-          <div className="FavoritesContainer">
-            {this.state.FavoritesData.map((d, i) =>
-              <div key={d.cityKey}>
-                {console.log(d)}
-                <Link to="/" >
-                <div className="FavoritesData" onClick={() => this.showFullForecast(d.cityKey, d.cityName)} >
-                  <div className="FavCity"> {d.cityName} </div>
-                  <img className="FavPic" src={`https://developer.accuweather.com/sites/default/files/${d.res[0].WeatherIcon.toString().length === 1 ? "0" + d.res[0].WeatherIcon : d.res[0].WeatherIcon}-s.png`} alt="" />
-                  <div className="FavPhrase"> {d.res[0].WeatherText} </div>
+          <div className="FavoritesContainer container">
+            <div className="row" >
+              {this.state.FavoritesData.map((d, i) =>
+                <div key={d.cityKey} >
+                  {/* {console.log(d)} */}
+                  <Link to="/" >
+                    <div className="FavoritesData col-sm" onClick={() => this.showFullForecast(d.cityKey, d.cityName)} >
+                      <div className="FavCity"> {d.cityName} </div>
+                      <img className="FavPic" src={`https://developer.accuweather.com/sites/default/files/${d.res[0].WeatherIcon.toString().length === 1 ? "0" + d.res[0].WeatherIcon : d.res[0].WeatherIcon}-s.png`} alt="" />
+                      <div className="FavPhrase"> {d.res[0].WeatherText} </div>
 
-                  <div className="FavTemp" >
-                    {!this.props.isFahrenheit ? Math.floor((parseInt(d.res[0].Temperature.Imperial.Value) - 32) / 1.8) + "°": d.res[0].Temperature.Imperial.Value + "°"}
-                  </div>
+                      <div className="FavTemp" >
+                        {!this.props.isFahrenheit ? Math.floor((parseInt(d.res[0].Temperature.Imperial.Value) - 32) / 1.8) + "°" : d.res[0].Temperature.Imperial.Value + "°"}
+                      </div>
+                    </div>
+                  </Link>
+                  <div><button className="FavRemove" onClick={() => this.removeFromFavorites(d.cityKey, i)}><i class="fa fa-trash"></i> </button> </div>
                 </div>
-                </Link>
-                <div><button className="FavRemove" onClick={() => this.removeFromFavorites(d.cityKey, i)}><i class="fa fa-trash"></i> </button> </div>
-              </div>
-            )
-            } </div>
+              )}
+            </div>
+          </div>
           : null}
 
         {/* {this.state.popUp ? <div> <PopUp DegOption={this.state.DegOption} cityKey={this.state.cityKey} closePopUp={this.closePopUp} /> </div> : null} */}

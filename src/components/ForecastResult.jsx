@@ -4,6 +4,7 @@ import moment from 'moment'
 import axios from 'axios'
 import apiKey from '../config/apiKey';
 import { observer, inject } from 'mobx-react'
+import '../css/ForecastResult.css'
 
 
 @inject("FavoritesStore")
@@ -25,31 +26,31 @@ class ForecastResult extends Component {
     getForecastData = async (cityKey) => {
         if (this.state.forecastData === undefined) {
             let res = await axios.get(`https://dataservice.accuweather.com/forecasts/v1/daily/5day/${cityKey}?apikey=${apiKey}`)
-            console.log(res.data.DailyForecasts)
+            // console.log(res.data.DailyForecasts)
             this.setState({ forecastData: res.data.DailyForecasts })
         }
     }
     render() {
         return (
-
-
-            <div class="ForcastColumn" >
-
+            <div className="ForcastColumn container" >
+<div className="row">
+    
                 {this.state.forecastData ? this.state.forecastData.map(x =>
-                    <div class="eachColumn">
-                        <div class="fullDate"> {moment(x.Date).format('dddd')} - {moment(x.Date).format('MMM Do')}</div>
+                    <div className="eachColumn col-sm">
+                        <div className="fullDate"> {moment(x.Date).format('dddd')} - {moment(x.Date).format('MMM Do')}</div>
 
-                        <div class="DayAndNight">
-                            <div class="dayPhrase"> {x.Day.IconPhrase} </div>
-                            <div class="dayPic"><img src={`https://developer.accuweather.com/sites/default/files/${x.Day.Icon.toString().length === 1 ? "0" + x.Day.Icon : x.Day.Icon}-s.png`} alt="" /> </div>
-                            <div class="nightPhrase"> {x.Night.IconPhrase} </div>
-                            {console.log(x.Day.Icon, typeof (x.Day.Icon), x.Day.Icon.toString().length)}
-                            {console.log(x.Night.Icon, typeof (x.Night.Icon), x.Night.Icon.toString().length)}
-                            <div class="nightPic"><img src={`https://developer.accuweather.com/sites/default/files/${x.Night.Icon.toString().length === 1 ? "0" + x.Night.Icon : x.Night.Icon}-s.png`} alt="" /> </div>
+                        <div className="DayAndNight">
+                            <div className="dayPhrase"> {x.Day.IconPhrase} </div>
+                            <div className="dayPic"><img src={`https://developer.accuweather.com/sites/default/files/${x.Day.Icon.toString().length === 1 ? "0" + x.Day.Icon : x.Day.Icon}-s.png`} alt="" /> </div>
+                            <div className="nightPhrase"> {x.Night.IconPhrase} </div>
+                            {/* {console.log(x.Day.Icon, typeof (x.Day.Icon), x.Day.Icon.toString().length)} */}
+                            {/* {console.log(x.Night.Icon, typeof (x.Night.Icon), x.Night.Icon.toString().length)} */}
+                            <div className="nightPic"><img src={`https://developer.accuweather.com/sites/default/files/${x.Night.Icon.toString().length === 1 ? "0" + x.Night.Icon : x.Night.Icon}-s.png`} alt="" /> </div>
                         </div>
-                        {console.log(x.Temperature)}
-                        <div class="temperature"> {this.props.isFahrenheit ? x.Temperature.Minimum.Value + "° / " + x.Temperature.Maximum.Value + "°" : Math.floor((parseInt(x.Temperature.Minimum.Value) - 32) / 1.8) + "° / " + Math.floor((parseInt(x.Temperature.Maximum.Value) - 32) / 1.8) + "°"}</div>
+                        {/* {console.log(x.Temperature)} */}
+                        <div className="temperature"> {this.props.isFahrenheit ? x.Temperature.Minimum.Value + "° / " + x.Temperature.Maximum.Value + "°" : Math.floor((parseInt(x.Temperature.Minimum.Value) - 32) / 1.8) + "° / " + Math.floor((parseInt(x.Temperature.Maximum.Value) - 32) / 1.8) + "°"}</div>
                     </div>) : null}
+</div>
             </div>
         )
     }
